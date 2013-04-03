@@ -190,18 +190,18 @@ int main(int argc, char **argv)
     }
     
     
-    int (*seg)[5];
-    for (seg = segments; seg[1] != seg[2]; seg++)
-        if ((*seg)[0] != -1)
+    int i;
+    for (i = 0; segments[i][1] != segments[i][2]; i++)
+        if (segments[i][0] != -1)
         {
             // start from this entry point
             route[0][0] = i;
             route[0][1] = TRAVERSED_FROM_1_TO_2;
-            route[0][2] = (*seg)[2];
+            route[0][2] = segments[i][2];
             // mark the segment on the map as "used"
-            (*seg)[3] = TRAVERSED_FROM_1_TO_2;
+            segments[i][3] = TRAVERSED_FROM_1_TO_2;
             explore();
             // reset and continue
-            route[0][0] = route[0][1] = route[0][2] = (*seg)[3] = 0;
+            route[0][0] = route[0][1] = route[0][2] = segments[i][3] = 0;
         }
 }
