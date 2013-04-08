@@ -1,0 +1,90 @@
+<html>
+    <script>
+        var map = [
+                   { entry_idx:    0, junctA_idx:   0, junctB_idx:   1, tot_dist_km:  0.90, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Smoke Lake -> Smoke Lake (middle)
+                   { entry_idx:   -1, junctA_idx:   1, junctB_idx:   2, tot_dist_km:  2.40, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Smoke Lake (middle) -> Smoke Lake (south)
+                   { entry_idx:   -1, junctA_idx:   2, junctB_idx:   3, tot_dist_km:  3.40, port_dist_m:   240, num_port:  1, time: 0, dirs: 0}, // Smoke Lake (south) -> Ragged Lake
+                   { entry_idx:   -1, junctA_idx:   2, junctB_idx:   4, tot_dist_km:  3.40, port_dist_m:  1115, num_port:  3, time: 0, dirs: 0}, // Smoke Lake (south) -> Claude Lake
+                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   4, tot_dist_km:  2.80, port_dist_m:  1065, num_port:  3, time: 0, dirs: 0}, // Ragged Lake -> Claude Lake
+                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   4, tot_dist_km:  4.90, port_dist_m:   350, num_port:  1, time: 0, dirs: 0}, // Ragged Lake -> Claude Lake
+                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   5, tot_dist_km:  3.90, port_dist_m:   590, num_port:  1, time: 0, dirs: 0}, // Ragged Lake -> Big Porcupine Lake (north)
+                   { entry_idx:   -1, junctA_idx:   5, junctB_idx:   6, tot_dist_km:  2.70, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Big Porcupine Lake (north) -> Big Porcupine Lake (middle)
+                   { entry_idx:   -1, junctA_idx:   5, junctB_idx:   6, tot_dist_km:  1.00, port_dist_m:   395, num_port:  1, time: 0, dirs: 0}, // Big Porcupine Lake (north) -> Big Porcupine Lake (middle)
+                   { entry_idx:   -1, junctA_idx:   6, junctB_idx:   7, tot_dist_km:  1.00, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Big Porcupine Lake (middle) -> Big Porcupine Lake (south)
+                   { entry_idx:   -1, junctA_idx:   7, junctB_idx:   8, tot_dist_km:  1.80, port_dist_m:   220, num_port:  1, time: 0, dirs: 0}, // Big Porcupine Lake (south) -> Little Coon Lake
+                   { entry_idx:   -1, junctA_idx:   8, junctB_idx:   9, tot_dist_km:  1.00, port_dist_m:   930, num_port:  1, time: 0, dirs: 0}, // Little Coon Lake -> Lower Whatnot Lake
+                   { entry_idx:   -1, junctA_idx:   9, junctB_idx:  10, tot_dist_km:  1.80, port_dist_m:   140, num_port:  1, time: 0, dirs: 0}, // Lower Whatnot Lake -> McGarvey Lake (west)
+                   { entry_idx:   -1, junctA_idx:  10, junctB_idx:  11, tot_dist_km:  1.30, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // McGarvey Lake (west) -> McGarvey Lake (east)
+                   { entry_idx:   -1, junctA_idx:  11, junctB_idx:  12, tot_dist_km:  4.60, port_dist_m:  1895, num_port:  2, time: 0, dirs: 0}, // McGarvey Lake (east) -> Bonnechere Lake (south)
+                   { entry_idx:   -1, junctA_idx:   7, junctB_idx:  12, tot_dist_km:  1.80, port_dist_m:   200, num_port:  1, time: 0, dirs: 0}, // Big Porcupine Lake (south) -> Bonnechere Lake (south)
+                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  13, tot_dist_km:  1.80, port_dist_m:    50, num_port:  1, time: 0, dirs: 0}, // Bonnechere Lake (south) -> Cradle Lake
+                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  13, tot_dist_km:  2.10, port_dist_m:    40, num_port:  1, time: 0, dirs: 0}, // Bonnechere Lake (south) -> Cradle Lake
+                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  14, tot_dist_km:  6.90, port_dist_m:   950, num_port:  3, time: 0, dirs: 0}, // Bonnechere Lake (south) -> Lawrence Lake
+                   { entry_idx:   -1, junctA_idx:  13, junctB_idx:  14, tot_dist_km:  5.10, port_dist_m:  1000, num_port:  4, time: 0, dirs: 0}, // Cradle Lake -> Lawrence Lake
+                   { entry_idx:   -1, junctA_idx:  13, junctB_idx:  15, tot_dist_km:  9.80, port_dist_m:  4275, num_port:  8, time: 0, dirs: 0}, // Cradle Lake -> Cache Lake (south)
+                   { entry_idx:   -1, junctA_idx:  14, junctB_idx:  16, tot_dist_km:  0.10, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Lawrence Lake -> Pardee Lake
+                   { entry_idx:   -1, junctA_idx:  16, junctB_idx:  17, tot_dist_km:  5.90, port_dist_m:  1035, num_port:  1, time: 0, dirs: 0}, // Pardee Lake -> Head Lake
+                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  18, tot_dist_km:  1.90, port_dist_m:   290, num_port:  1, time: 0, dirs: 0}, // Head Lake -> Kenneth Lake
+                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  15, tot_dist_km:  2.70, port_dist_m:  1640, num_port:  1, time: 0, dirs: 0}, // Head Lake -> Cache Lake (south)
+                   { entry_idx:    1, junctA_idx:  19, junctB_idx:  15, tot_dist_km:  1.90, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Cache Lake (north) -> Cache Lake (south)
+                   { entry_idx:    1, junctA_idx:  19, junctB_idx:  20, tot_dist_km:  3.10, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Cache Lake (north) -> Tanamakoon Lake
+                   { entry_idx:   -1, junctA_idx:  20, junctB_idx:   1, tot_dist_km:  6.90, port_dist_m:  1560, num_port:  4, time: 0, dirs: 0}, // Tanamakoon Lake -> Smoke Lake (middle)
+                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  21, tot_dist_km:  4.40, port_dist_m:   460, num_port:  3, time: 0, dirs: 0}, // Head Lake -> Ma-Da-Was-Ka
+                   { entry_idx:   -1, junctA_idx:  15, junctB_idx:  21, tot_dist_km:  5.70, port_dist_m:   550, num_port:  2, time: 0, dirs: 0}, // Cache Lake (south) -> Ma-Da-Was-Ka
+                   { entry_idx:    2, junctA_idx:  22, junctB_idx:  21, tot_dist_km:  7.40, port_dist_m:   245, num_port:  2, time: 0, dirs: 0}, // Lake of Two Rivers -> Ma-Da-Was-Ka
+                   ];
+        
+        var entrypoints = ["6", "8", "A10"];
+        
+        var junctions = ["Smoke Lake", "Smoke Lake (middle)", "Smoke Lake (south)", "Ragged Lake", "Claude Lake", "Big Porcupine Lake (north)", "Big Porcupine Lake (middle)", "Big Porcupine Lake (south)", "Little Coon Lake", "Lower Whatnot Lake", "McGarvey Lake (west)", "McGarvey Lake (east)", "Bonnechere Lake (south)", "Cradle Lake", "Lawrence Lake", "Cache Lake (south)", "Pardee Lake", "Head Lake", "Kenneth Lake", "Cache Lake (north)", "Tanamakoon Lake", "Ma-Da-Was-Ka", "Lake of Two Rivers"];
+        
+        var TRAVELED_FROM_A_TO_B = 1;
+        var TRAVELED_FROM_B_TO_A = 2;
+        
+function not_finished_exploring(route)
+{
+    if (route.length)
+    {
+        route.push({map_idx: 0, junct_idx: map[0].junctA_idx, dir: TRAVELED_FROM_B_TO_A});
+        return (route.length < 4)
+    }
+    else
+    {
+        route.push({map_idx: 0, junct_idx: map[0].junctB_idx, dir: TRAVELED_FROM_A_TO_B});
+    }
+    return 1;
+}
+
+  
+function findRoutes()
+{
+    document.getElementById('para').innerHTML = "";
+
+    var trip_length_hours = document.getElementById('trip_length_hours').value;
+    var kilometer_per_hour_paddling = document.getElementById('kilometer_per_hour_paddling').value;
+    var meters_per_hour_portage = document.getElementById('meters_per_hour_portage').value;
+    var load_and_unload_minutes = document.getElementById('load_and_unload_minutes').value;
+    
+    for (var i = 0; i < map.length; i++)
+        map[i].time = map[i].tot_dist_km / kilometer_per_hour_paddling * 60 + map[i].port_dist_m / meters_per_hour_portage * 60 + map[i].num_port * load_and_unload_minutes;
+
+    var route = [];
+    while (not_finished_exploring(route))
+    {
+        if (route[route.length-1].dir == TRAVELED_FROM_B_TO_A && map[route[route.length-1].map_idx].entry_idx != -1)
+        {
+            
+            document.getElementById('para').innerHTML += entrypoints[map[0].entry_idx] + " " + junctions[map[0].junctA_idx] + " " + junctions[map[0].junctB_idx] + "<br>";
+        }
+    }
+}
+</script>
+Desired Trip Length: <input type="text" id="trip_length_hours" value="30" size="6"> Hours<br>
+Average Paddling Speed: <input type="text" id="kilometer_per_hour_paddling" value="2.7" size="6"> Kilometers / Hour<br>
+Average Portage Speed: <input type="text" id="meters_per_hour_portage" value="1000" size="6"> Meters / Hour<br>
+Average Unload + Load Time: <input type="text" id="load_and_unload_minutes" value="15" size="6"> Minutes<br>
+<input type='button' onclick='findRoutes()' value='Suggest Routes'/>
+<hr>
+Routes:
+<p id='para'></p>
+</html>
