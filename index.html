@@ -41,43 +41,147 @@
         var TRAVELED_FROM_A_TO_B = 1;
         var TRAVELED_FROM_B_TO_A = 2;
         
-function not_finished_exploring(route)
+function not_finished_exploring(route, trip_length_hours)
 {
-    if (route.length)
+    // if we're nowhere: find the first entry point
+    if (route.length == 0)
     {
-        route.push({map_idx: 0, junct_idx: map[0].junctA_idx, dir: TRAVELED_FROM_B_TO_A});
-        return (route.length < 4)
+        for (var i = 0; i < map.length; i++)
+        {
+            if (map[i].entry_idx != -1)
+            {
+                route.push({map_idx: i, junct_idx: map[i].junctB_idx, dir: TRAVELED_FROM_A_TO_B, time: map[i].time});
+                map[i].dirs |= TRAVELED_FROM_A_TO_B;
+                return 1;
+            }
+        }
+        // hmm... this isn't good. There are not entry points on the map. We're done.
+        return;
     }
-    else
+    // if we're somewhere: first, try to go further from here
+    if (route[route.length-1].time < trip_length_hours + 3)
     {
-        route.push({map_idx: 0, junct_idx: map[0].junctB_idx, dir: TRAVELED_FROM_A_TO_B});
+        for (var i = 0; i < map.length; i++)
+        {
+            if ((map[i].junctA_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_A_TO_B) == 0))
+            {
+                var total_time = route[route.length-1].time + map[i].time;
+                route.push({map_idx: i, junct_idx: map[i].junctB_idx, dir: TRAVELED_FROM_A_TO_B, time: total_time});
+                map[i].dirs |= TRAVELED_FROM_A_TO_B;
+                return 1;
+            }
+            if ((map[i].junctB_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_B_TO_A) == 0))
+            {
+                var total_time = route[route.length-1].time + map[i].time;
+                route.push({map_idx: i, junct_idx: map[i].junctA_idx, dir: TRAVELED_FROM_B_TO_A, time: total_time});
+                map[i].dirs |= TRAVELED_FROM_B_TO_A;
+                return 1;
+            }
+        }
     }
-    return 1;
+    // second, take a different path or backup
+    while(route.length > 0)
+    {
+        // remove the last segment
+        var last = route.pop();
+        map[last.map_idx].dirs ^= last.dir;
+        // start from last segment and look for the next one
+        if (route.length > 0)
+        {
+            for (var i = last.map_idx + 1; i < map.length; i++)
+            {
+                if ((map[i].junctA_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_A_TO_B) == 0))
+                {
+                    var total_time = route[route.length-1].time + map[i].time;
+                    route.push({map_idx: i, junct_idx: map[i].junctB_idx, dir: TRAVELED_FROM_A_TO_B, time: total_time});
+                    map[i].dirs |= TRAVELED_FROM_A_TO_B;
+                    return 1;
+                }
+                if ((map[i].junctB_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_B_TO_A) == 0))
+                {
+                    var total_time = route[route.length-1].time + map[i].time;
+                    route.push({map_idx: i, junct_idx: map[i].junctA_idx, dir: TRAVELED_FROM_B_TO_A, time: total_time});
+                    map[i].dirs |= TRAVELED_FROM_B_TO_A;
+                    return 1;
+                }
+            }
+        }
+        // nothing from here. We've already popped the last segment, go around again - one level up
+    }
+    return 0;
 }
 
   
 function findRoutes()
 {
+    // clear whatever was in the div before
     document.getElementById('para').innerHTML = "";
 
+    // get the user parameters out of the form elements
     var trip_length_hours = document.getElementById('trip_length_hours').value;
     var kilometer_per_hour_paddling = document.getElementById('kilometer_per_hour_paddling').value;
     var meters_per_hour_portage = document.getElementById('meters_per_hour_portage').value;
     var load_and_unload_minutes = document.getElementById('load_and_unload_minutes').value;
     
+    // calculate the cost of each segment using the user supplied parameters
     for (var i = 0; i < map.length; i++)
-        map[i].time = map[i].tot_dist_km / kilometer_per_hour_paddling * 60 + map[i].port_dist_m / meters_per_hour_portage * 60 + map[i].num_port * load_and_unload_minutes;
-
-    var route = [];
-    while (not_finished_exploring(route))
     {
-        if (route[route.length-1].dir == TRAVELED_FROM_B_TO_A && map[route[route.length-1].map_idx].entry_idx != -1)
+        map[i].time = map[i].tot_dist_km / kilometer_per_hour_paddling * 60 + map[i].port_dist_m / meters_per_hour_portage * 60 + map[i].num_port * load_and_unload_minutes;
+        map[i].dirs = 0;
+    }
+
+    var count = 0;
+    var routes = [];
+    var route = [];
+    while ((count < 100) && not_finished_exploring(route, trip_length_hours * 60))
+    {
+        // if the last segment of the route goes from B to A and A is an entry point, append the route to whatever is already in the div
+        if ((route[route.length-1].dir == TRAVELED_FROM_B_TO_A) && (map[route[route.length-1].map_idx].entry_idx == map[route[0].map_idx].entry_idx))
         {
-            
-            document.getElementById('para').innerHTML += entrypoints[map[0].entry_idx] + " " + junctions[map[0].junctA_idx] + " " + junctions[map[0].junctB_idx] + "<br>";
+            // is this trip the correct length?
+            if ((route[route.length-1].time > (trip_length_hours * 60 * 0.95)) && (route[route.length-1].time < (trip_length_hours * 60 * 1.05)))
+            {
+                var m = [];
+                for (var i = 0; i < map.length; i++)
+                {
+                    m.push(map[i].dirs);
+                }
+                var equal = 0;
+                for (var i = 0; i < routes.length; i++)
+                {
+                    var difference = 0;
+                    for (var j = 0; j < map.length; j++)
+                    {
+                        if (m[j] != routes[i].map[j])
+                        {
+                            difference = 1;
+                        }
+                    }
+                    if (difference == 0)
+                    {
+                        equal = 1;
+                    }
+                }
+                if (equal == 0)
+                {
+                    count++;
+                    routes.push({route: route.slice(), map: m.slice()});
+                }
+            }
         }
     }
+    document.getElementById('para').innerHTML = "";
+    for (var i = 0; i < routes.length; i++)
+    {
+        document.getElementById('para').innerHTML += " " + i + " (" + (Math.round(routes[i].route[routes[i].route.length-1].time*100/60)/100) + " hours) " + entrypoints[map[routes[i].route[0].map_idx].entry_idx] + ": " + junctions[map[routes[i].route[0].map_idx].junctA_idx];
+        for (var j = 0; j < routes[i].route.length; j++)
+        {
+            document.getElementById('para').innerHTML += " -> " + junctions[routes[i].route[j].junct_idx];
+        }
+        document.getElementById('para').innerHTML += "<br>";
+    }
 }
+        
 </script>
 Desired Trip Length: <input type="text" id="trip_length_hours" value="30" size="6"> Hours<br>
 Average Paddling Speed: <input type="text" id="kilometer_per_hour_paddling" value="2.7" size="6"> Kilometers / Hour<br>
