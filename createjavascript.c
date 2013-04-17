@@ -79,7 +79,7 @@ int main(int argc, char **argv)
             segments[num_segments][0] = list_id(e, entrypoints);
         segments[num_segments][1] = list_id(j1, junctions);
         segments[num_segments][2] = list_id(j2, junctions);
-        printf("{ entry_idx: %4d, junctA_idx: %3d, junctB_idx: %3d, tot_dist_km: %5.2f, port_dist_m: %5.0f, num_port: %2.0f, time: 0, dirs: 0}, // %s -> %s\n", segments[num_segments][0], segments[num_segments][1], segments[num_segments][2], total_distance_kilometers, portage_distance_meters, number_of_portages, j1, j2);
+        printf("{ entry_idx: %4d, junctA_idx: %3d, junctB_idx: %3d, tot_dist_km: %5.2f, port_dist_m: %5.0f, num_port: %2.0f}, // %s -> %s\n", segments[num_segments][0], segments[num_segments][1], segments[num_segments][2], total_distance_kilometers, portage_distance_meters, number_of_portages, j1, j2);
 
         num_segments++;
         
@@ -88,6 +88,24 @@ int main(int argc, char **argv)
     }
     printf("]\n\n");
     int i;
+    printf("var segments = [\n");
+    int num_entries = 0;
+    for (i = 0; i < num_segments; i++)
+        if (segments[i][0] != -1)
+        {
+            num_entries++;
+            printf("{ available: 1, from_junct_idx: %3d, to_junct_idx: %3d, map_idx: %3d, time_minutes: 0},\n", segments[i][1], segments[i][2], i);
+        }
+    for (i = 0; i < num_segments; i++)
+    {
+        if (segments[i][0] == -1)
+        {
+            printf("{ available: 1, from_junct_idx: %3d, to_junct_idx: %3d, map_idx: %3d, time_minutes: 0},\n", segments[i][1], segments[i][2], i);
+        }
+        printf("{ available: 1, from_junct_idx: %3d, to_junct_idx: %3d, map_idx: %3d, time_minutes: 0},\n", segments[i][2], segments[i][1], i);
+    }
+    printf("]\n\n");
+    printf("var num_entries = %3d\n\n", num_entries);
     printf("var entrypoints = [\"%s\"", entrypoints[0]);
     for (i = 1; entrypoints[i]; i++)
         printf(", \"%s\"", entrypoints[i]);

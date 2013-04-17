@@ -1,112 +1,148 @@
 <html>
     <script>
         var map = [
-                   { entry_idx:    0, junctA_idx:   0, junctB_idx:   1, tot_dist_km:  0.90, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Smoke Lake -> Smoke Lake (middle)
-                   { entry_idx:   -1, junctA_idx:   1, junctB_idx:   2, tot_dist_km:  2.40, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Smoke Lake (middle) -> Smoke Lake (south)
-                   { entry_idx:   -1, junctA_idx:   2, junctB_idx:   3, tot_dist_km:  3.40, port_dist_m:   240, num_port:  1, time: 0, dirs: 0}, // Smoke Lake (south) -> Ragged Lake
-                   { entry_idx:   -1, junctA_idx:   2, junctB_idx:   4, tot_dist_km:  3.40, port_dist_m:  1115, num_port:  3, time: 0, dirs: 0}, // Smoke Lake (south) -> Claude Lake
-                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   4, tot_dist_km:  2.80, port_dist_m:  1065, num_port:  3, time: 0, dirs: 0}, // Ragged Lake -> Claude Lake
-                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   4, tot_dist_km:  4.90, port_dist_m:   350, num_port:  1, time: 0, dirs: 0}, // Ragged Lake -> Claude Lake
-                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   5, tot_dist_km:  3.90, port_dist_m:   590, num_port:  1, time: 0, dirs: 0}, // Ragged Lake -> Big Porcupine Lake (north)
-                   { entry_idx:   -1, junctA_idx:   5, junctB_idx:   6, tot_dist_km:  2.70, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Big Porcupine Lake (north) -> Big Porcupine Lake (middle)
-                   { entry_idx:   -1, junctA_idx:   5, junctB_idx:   6, tot_dist_km:  1.00, port_dist_m:   395, num_port:  1, time: 0, dirs: 0}, // Big Porcupine Lake (north) -> Big Porcupine Lake (middle)
-                   { entry_idx:   -1, junctA_idx:   6, junctB_idx:   7, tot_dist_km:  1.00, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Big Porcupine Lake (middle) -> Big Porcupine Lake (south)
-                   { entry_idx:   -1, junctA_idx:   7, junctB_idx:   8, tot_dist_km:  1.80, port_dist_m:   220, num_port:  1, time: 0, dirs: 0}, // Big Porcupine Lake (south) -> Little Coon Lake
-                   { entry_idx:   -1, junctA_idx:   8, junctB_idx:   9, tot_dist_km:  1.00, port_dist_m:   930, num_port:  1, time: 0, dirs: 0}, // Little Coon Lake -> Lower Whatnot Lake
-                   { entry_idx:   -1, junctA_idx:   9, junctB_idx:  10, tot_dist_km:  1.80, port_dist_m:   140, num_port:  1, time: 0, dirs: 0}, // Lower Whatnot Lake -> McGarvey Lake (west)
-                   { entry_idx:   -1, junctA_idx:  10, junctB_idx:  11, tot_dist_km:  1.30, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // McGarvey Lake (west) -> McGarvey Lake (east)
-                   { entry_idx:   -1, junctA_idx:  11, junctB_idx:  12, tot_dist_km:  4.60, port_dist_m:  1895, num_port:  2, time: 0, dirs: 0}, // McGarvey Lake (east) -> Bonnechere Lake (south)
-                   { entry_idx:   -1, junctA_idx:   7, junctB_idx:  12, tot_dist_km:  1.80, port_dist_m:   200, num_port:  1, time: 0, dirs: 0}, // Big Porcupine Lake (south) -> Bonnechere Lake (south)
-                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  13, tot_dist_km:  1.80, port_dist_m:    50, num_port:  1, time: 0, dirs: 0}, // Bonnechere Lake (south) -> Cradle Lake
-                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  13, tot_dist_km:  2.10, port_dist_m:    40, num_port:  1, time: 0, dirs: 0}, // Bonnechere Lake (south) -> Cradle Lake
-                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  14, tot_dist_km:  6.90, port_dist_m:   950, num_port:  3, time: 0, dirs: 0}, // Bonnechere Lake (south) -> Lawrence Lake
-                   { entry_idx:   -1, junctA_idx:  13, junctB_idx:  14, tot_dist_km:  5.10, port_dist_m:  1000, num_port:  4, time: 0, dirs: 0}, // Cradle Lake -> Lawrence Lake
-                   { entry_idx:   -1, junctA_idx:  13, junctB_idx:  15, tot_dist_km:  9.80, port_dist_m:  4275, num_port:  8, time: 0, dirs: 0}, // Cradle Lake -> Cache Lake (south)
-                   { entry_idx:   -1, junctA_idx:  14, junctB_idx:  16, tot_dist_km:  0.10, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Lawrence Lake -> Pardee Lake
-                   { entry_idx:   -1, junctA_idx:  16, junctB_idx:  17, tot_dist_km:  5.90, port_dist_m:  1035, num_port:  1, time: 0, dirs: 0}, // Pardee Lake -> Head Lake
-                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  18, tot_dist_km:  1.90, port_dist_m:   290, num_port:  1, time: 0, dirs: 0}, // Head Lake -> Kenneth Lake
-                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  15, tot_dist_km:  2.70, port_dist_m:  1640, num_port:  1, time: 0, dirs: 0}, // Head Lake -> Cache Lake (south)
-                   { entry_idx:    1, junctA_idx:  19, junctB_idx:  15, tot_dist_km:  1.90, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Cache Lake (north) -> Cache Lake (south)
-                   { entry_idx:    1, junctA_idx:  19, junctB_idx:  20, tot_dist_km:  3.10, port_dist_m:     0, num_port:  0, time: 0, dirs: 0}, // Cache Lake (north) -> Tanamakoon Lake
-                   { entry_idx:   -1, junctA_idx:  20, junctB_idx:   1, tot_dist_km:  6.90, port_dist_m:  1560, num_port:  4, time: 0, dirs: 0}, // Tanamakoon Lake -> Smoke Lake (middle)
-                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  21, tot_dist_km:  4.40, port_dist_m:   460, num_port:  3, time: 0, dirs: 0}, // Head Lake -> Ma-Da-Was-Ka
-                   { entry_idx:   -1, junctA_idx:  15, junctB_idx:  21, tot_dist_km:  5.70, port_dist_m:   550, num_port:  2, time: 0, dirs: 0}, // Cache Lake (south) -> Ma-Da-Was-Ka
-                   { entry_idx:    2, junctA_idx:  22, junctB_idx:  21, tot_dist_km:  7.40, port_dist_m:   245, num_port:  2, time: 0, dirs: 0}, // Lake of Two Rivers -> Ma-Da-Was-Ka
-                   ];
+                   { entry_idx:    0, junctA_idx:   0, junctB_idx:   1, tot_dist_km:  0.90, port_dist_m:     0, num_port:  0}, // Smoke Lake -> Smoke Lake (middle)
+                   { entry_idx:   -1, junctA_idx:   1, junctB_idx:   2, tot_dist_km:  2.40, port_dist_m:     0, num_port:  0}, // Smoke Lake (middle) -> Smoke Lake (south)
+                   { entry_idx:   -1, junctA_idx:   2, junctB_idx:   3, tot_dist_km:  3.40, port_dist_m:   240, num_port:  1}, // Smoke Lake (south) -> Ragged Lake
+                   { entry_idx:   -1, junctA_idx:   2, junctB_idx:   4, tot_dist_km:  3.40, port_dist_m:  1115, num_port:  3}, // Smoke Lake (south) -> Claude Lake
+                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   4, tot_dist_km:  2.80, port_dist_m:  1065, num_port:  3}, // Ragged Lake -> Claude Lake
+                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   4, tot_dist_km:  4.90, port_dist_m:   350, num_port:  1}, // Ragged Lake -> Claude Lake
+                   { entry_idx:   -1, junctA_idx:   3, junctB_idx:   5, tot_dist_km:  3.90, port_dist_m:   590, num_port:  1}, // Ragged Lake -> Big Porcupine Lake (north)
+                   { entry_idx:   -1, junctA_idx:   5, junctB_idx:   6, tot_dist_km:  2.70, port_dist_m:     0, num_port:  0}, // Big Porcupine Lake (north) -> Big Porcupine Lake (middle)
+                   { entry_idx:   -1, junctA_idx:   5, junctB_idx:   6, tot_dist_km:  1.00, port_dist_m:   395, num_port:  1}, // Big Porcupine Lake (north) -> Big Porcupine Lake (middle)
+                   { entry_idx:   -1, junctA_idx:   6, junctB_idx:   7, tot_dist_km:  1.00, port_dist_m:     0, num_port:  0}, // Big Porcupine Lake (middle) -> Big Porcupine Lake (south)
+                   { entry_idx:   -1, junctA_idx:   7, junctB_idx:   8, tot_dist_km:  1.80, port_dist_m:   220, num_port:  1}, // Big Porcupine Lake (south) -> Little Coon Lake
+                   { entry_idx:   -1, junctA_idx:   8, junctB_idx:   9, tot_dist_km:  1.00, port_dist_m:   930, num_port:  1}, // Little Coon Lake -> Lower Whatnot Lake
+                   { entry_idx:   -1, junctA_idx:   9, junctB_idx:  10, tot_dist_km:  1.80, port_dist_m:   140, num_port:  1}, // Lower Whatnot Lake -> McGarvey Lake (west)
+                   { entry_idx:   -1, junctA_idx:  10, junctB_idx:  11, tot_dist_km:  1.30, port_dist_m:     0, num_port:  0}, // McGarvey Lake (west) -> McGarvey Lake (east)
+                   { entry_idx:   -1, junctA_idx:  11, junctB_idx:  12, tot_dist_km:  4.60, port_dist_m:  1895, num_port:  2}, // McGarvey Lake (east) -> Bonnechere Lake (south)
+                   { entry_idx:   -1, junctA_idx:   7, junctB_idx:  12, tot_dist_km:  1.80, port_dist_m:   200, num_port:  1}, // Big Porcupine Lake (south) -> Bonnechere Lake (south)
+                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  13, tot_dist_km:  1.80, port_dist_m:    50, num_port:  1}, // Bonnechere Lake (south) -> Cradle Lake
+                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  13, tot_dist_km:  2.10, port_dist_m:    40, num_port:  1}, // Bonnechere Lake (south) -> Cradle Lake
+                   { entry_idx:   -1, junctA_idx:  12, junctB_idx:  14, tot_dist_km:  6.90, port_dist_m:   950, num_port:  3}, // Bonnechere Lake (south) -> Lawrence Lake
+                   { entry_idx:   -1, junctA_idx:  13, junctB_idx:  14, tot_dist_km:  5.10, port_dist_m:  1000, num_port:  4}, // Cradle Lake -> Lawrence Lake
+                   { entry_idx:   -1, junctA_idx:  13, junctB_idx:  15, tot_dist_km:  9.80, port_dist_m:  4275, num_port:  8}, // Cradle Lake -> Cache Lake (south)
+                   { entry_idx:   -1, junctA_idx:  14, junctB_idx:  16, tot_dist_km:  0.10, port_dist_m:     0, num_port:  0}, // Lawrence Lake -> Pardee Lake
+                   { entry_idx:   -1, junctA_idx:  16, junctB_idx:  17, tot_dist_km:  5.90, port_dist_m:  1035, num_port:  1}, // Pardee Lake -> Head Lake
+                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  18, tot_dist_km:  1.90, port_dist_m:   290, num_port:  1}, // Head Lake -> Kenneth Lake
+                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  15, tot_dist_km:  2.70, port_dist_m:  1640, num_port:  1}, // Head Lake -> Cache Lake (south)
+                   { entry_idx:    1, junctA_idx:  19, junctB_idx:  15, tot_dist_km:  1.90, port_dist_m:     0, num_port:  0}, // Cache Lake (north) -> Cache Lake (south)
+                   { entry_idx:    1, junctA_idx:  19, junctB_idx:  20, tot_dist_km:  3.10, port_dist_m:     0, num_port:  0}, // Cache Lake (north) -> Tanamakoon Lake
+                   { entry_idx:   -1, junctA_idx:  20, junctB_idx:   1, tot_dist_km:  6.90, port_dist_m:  1560, num_port:  4}, // Tanamakoon Lake -> Smoke Lake (middle)
+                   { entry_idx:   -1, junctA_idx:  17, junctB_idx:  21, tot_dist_km:  4.40, port_dist_m:   460, num_port:  3}, // Head Lake -> Ma-Da-Was-Ka
+                   { entry_idx:   -1, junctA_idx:  15, junctB_idx:  21, tot_dist_km:  5.70, port_dist_m:   550, num_port:  2}, // Cache Lake (south) -> Ma-Da-Was-Ka
+                   { entry_idx:    2, junctA_idx:  22, junctB_idx:  21, tot_dist_km:  7.40, port_dist_m:   245, num_port:  2}, // Lake of Two Rivers -> Ma-Da-Was-Ka
+                   ]
         
-        var entrypoints = ["6", "8", "A10"];
+        var segments = [
+                        { available: 1, from_junct_idx:   0, to_junct_idx:   1, map_idx:   0, time_minutes: 0},
+                        { available: 1, from_junct_idx:  19, to_junct_idx:  15, map_idx:  25, time_minutes: 0},
+                        { available: 1, from_junct_idx:  19, to_junct_idx:  20, map_idx:  26, time_minutes: 0},
+                        { available: 1, from_junct_idx:  22, to_junct_idx:  21, map_idx:  30, time_minutes: 0},
+                        { available: 1, from_junct_idx:   1, to_junct_idx:   0, map_idx:   0, time_minutes: 0},
+                        { available: 1, from_junct_idx:   1, to_junct_idx:   2, map_idx:   1, time_minutes: 0},
+                        { available: 1, from_junct_idx:   2, to_junct_idx:   1, map_idx:   1, time_minutes: 0},
+                        { available: 1, from_junct_idx:   2, to_junct_idx:   3, map_idx:   2, time_minutes: 0},
+                        { available: 1, from_junct_idx:   3, to_junct_idx:   2, map_idx:   2, time_minutes: 0},
+                        { available: 1, from_junct_idx:   2, to_junct_idx:   4, map_idx:   3, time_minutes: 0},
+                        { available: 1, from_junct_idx:   4, to_junct_idx:   2, map_idx:   3, time_minutes: 0},
+                        { available: 1, from_junct_idx:   3, to_junct_idx:   4, map_idx:   4, time_minutes: 0},
+                        { available: 1, from_junct_idx:   4, to_junct_idx:   3, map_idx:   4, time_minutes: 0},
+                        { available: 1, from_junct_idx:   3, to_junct_idx:   4, map_idx:   5, time_minutes: 0},
+                        { available: 1, from_junct_idx:   4, to_junct_idx:   3, map_idx:   5, time_minutes: 0},
+                        { available: 1, from_junct_idx:   3, to_junct_idx:   5, map_idx:   6, time_minutes: 0},
+                        { available: 1, from_junct_idx:   5, to_junct_idx:   3, map_idx:   6, time_minutes: 0},
+                        { available: 1, from_junct_idx:   5, to_junct_idx:   6, map_idx:   7, time_minutes: 0},
+                        { available: 1, from_junct_idx:   6, to_junct_idx:   5, map_idx:   7, time_minutes: 0},
+                        { available: 1, from_junct_idx:   5, to_junct_idx:   6, map_idx:   8, time_minutes: 0},
+                        { available: 1, from_junct_idx:   6, to_junct_idx:   5, map_idx:   8, time_minutes: 0},
+                        { available: 1, from_junct_idx:   6, to_junct_idx:   7, map_idx:   9, time_minutes: 0},
+                        { available: 1, from_junct_idx:   7, to_junct_idx:   6, map_idx:   9, time_minutes: 0},
+                        { available: 1, from_junct_idx:   7, to_junct_idx:   8, map_idx:  10, time_minutes: 0},
+                        { available: 1, from_junct_idx:   8, to_junct_idx:   7, map_idx:  10, time_minutes: 0},
+                        { available: 1, from_junct_idx:   8, to_junct_idx:   9, map_idx:  11, time_minutes: 0},
+                        { available: 1, from_junct_idx:   9, to_junct_idx:   8, map_idx:  11, time_minutes: 0},
+                        { available: 1, from_junct_idx:   9, to_junct_idx:  10, map_idx:  12, time_minutes: 0},
+                        { available: 1, from_junct_idx:  10, to_junct_idx:   9, map_idx:  12, time_minutes: 0},
+                        { available: 1, from_junct_idx:  10, to_junct_idx:  11, map_idx:  13, time_minutes: 0},
+                        { available: 1, from_junct_idx:  11, to_junct_idx:  10, map_idx:  13, time_minutes: 0},
+                        { available: 1, from_junct_idx:  11, to_junct_idx:  12, map_idx:  14, time_minutes: 0},
+                        { available: 1, from_junct_idx:  12, to_junct_idx:  11, map_idx:  14, time_minutes: 0},
+                        { available: 1, from_junct_idx:   7, to_junct_idx:  12, map_idx:  15, time_minutes: 0},
+                        { available: 1, from_junct_idx:  12, to_junct_idx:   7, map_idx:  15, time_minutes: 0},
+                        { available: 1, from_junct_idx:  12, to_junct_idx:  13, map_idx:  16, time_minutes: 0},
+                        { available: 1, from_junct_idx:  13, to_junct_idx:  12, map_idx:  16, time_minutes: 0},
+                        { available: 1, from_junct_idx:  12, to_junct_idx:  13, map_idx:  17, time_minutes: 0},
+                        { available: 1, from_junct_idx:  13, to_junct_idx:  12, map_idx:  17, time_minutes: 0},
+                        { available: 1, from_junct_idx:  12, to_junct_idx:  14, map_idx:  18, time_minutes: 0},
+                        { available: 1, from_junct_idx:  14, to_junct_idx:  12, map_idx:  18, time_minutes: 0},
+                        { available: 1, from_junct_idx:  13, to_junct_idx:  14, map_idx:  19, time_minutes: 0},
+                        { available: 1, from_junct_idx:  14, to_junct_idx:  13, map_idx:  19, time_minutes: 0},
+                        { available: 1, from_junct_idx:  13, to_junct_idx:  15, map_idx:  20, time_minutes: 0},
+                        { available: 1, from_junct_idx:  15, to_junct_idx:  13, map_idx:  20, time_minutes: 0},
+                        { available: 1, from_junct_idx:  14, to_junct_idx:  16, map_idx:  21, time_minutes: 0},
+                        { available: 1, from_junct_idx:  16, to_junct_idx:  14, map_idx:  21, time_minutes: 0},
+                        { available: 1, from_junct_idx:  16, to_junct_idx:  17, map_idx:  22, time_minutes: 0},
+                        { available: 1, from_junct_idx:  17, to_junct_idx:  16, map_idx:  22, time_minutes: 0},
+                        { available: 1, from_junct_idx:  17, to_junct_idx:  18, map_idx:  23, time_minutes: 0},
+                        { available: 1, from_junct_idx:  18, to_junct_idx:  17, map_idx:  23, time_minutes: 0},
+                        { available: 1, from_junct_idx:  17, to_junct_idx:  15, map_idx:  24, time_minutes: 0},
+                        { available: 1, from_junct_idx:  15, to_junct_idx:  17, map_idx:  24, time_minutes: 0},
+                        { available: 1, from_junct_idx:  15, to_junct_idx:  19, map_idx:  25, time_minutes: 0},
+                        { available: 1, from_junct_idx:  20, to_junct_idx:  19, map_idx:  26, time_minutes: 0},
+                        { available: 1, from_junct_idx:  20, to_junct_idx:   1, map_idx:  27, time_minutes: 0},
+                        { available: 1, from_junct_idx:   1, to_junct_idx:  20, map_idx:  27, time_minutes: 0},
+                        { available: 1, from_junct_idx:  17, to_junct_idx:  21, map_idx:  28, time_minutes: 0},
+                        { available: 1, from_junct_idx:  21, to_junct_idx:  17, map_idx:  28, time_minutes: 0},
+                        { available: 1, from_junct_idx:  15, to_junct_idx:  21, map_idx:  29, time_minutes: 0},
+                        { available: 1, from_junct_idx:  21, to_junct_idx:  15, map_idx:  29, time_minutes: 0},
+                        { available: 1, from_junct_idx:  21, to_junct_idx:  22, map_idx:  30, time_minutes: 0},
+                        ]
         
-        var junctions = ["Smoke Lake", "Smoke Lake (middle)", "Smoke Lake (south)", "Ragged Lake", "Claude Lake", "Big Porcupine Lake (north)", "Big Porcupine Lake (middle)", "Big Porcupine Lake (south)", "Little Coon Lake", "Lower Whatnot Lake", "McGarvey Lake (west)", "McGarvey Lake (east)", "Bonnechere Lake (south)", "Cradle Lake", "Lawrence Lake", "Cache Lake (south)", "Pardee Lake", "Head Lake", "Kenneth Lake", "Cache Lake (north)", "Tanamakoon Lake", "Ma-Da-Was-Ka", "Lake of Two Rivers"];
+        var num_entries =   4
         
-        var TRAVELED_FROM_A_TO_B = 1;
-        var TRAVELED_FROM_B_TO_A = 2;
+        var entrypoints = ["6", "8", "A10"]
         
-function not_finished_exploring(route, trip_length_hours)
+        var junctions = ["Smoke Lake", "Smoke Lake (middle)", "Smoke Lake (south)", "Ragged Lake", "Claude Lake", "Big Porcupine Lake (north)", "Big Porcupine Lake (middle)", "Big Porcupine Lake (south)", "Little Coon Lake", "Lower Whatnot Lake", "McGarvey Lake (west)", "McGarvey Lake (east)", "Bonnechere Lake (south)", "Cradle Lake", "Lawrence Lake", "Cache Lake (south)", "Pardee Lake", "Head Lake", "Kenneth Lake", "Cache Lake (north)", "Tanamakoon Lake", "Ma-Da-Was-Ka", "Lake of Two Rivers"]
+        
+        
+function not_finished_exploring(route, desired_trip_length_minutes, route_time_minutes)
 {
-    // if we're nowhere: find the first entry point
-    if (route.length == 0)
+    // first, try to go further from here
+    if (route_time_minutes < desired_trip_length_minutes + 180)
     {
-        for (var i = 0; i < map.length; i++)
+        var last_junction_idx = segments[route[route.length-1]].to_junct_idx;
+        for (var i = 0; i < segments.length; i++)
         {
-            if (map[i].entry_idx != -1)
+            if ((segments[i].from_junct_idx == last_junction_idx) && (segments[i].available == 1))
             {
-                route.push({map_idx: i, junct_idx: map[i].junctB_idx, dir: TRAVELED_FROM_A_TO_B, time: map[i].time});
-                map[i].dirs |= TRAVELED_FROM_A_TO_B;
-                return 1;
-            }
-        }
-        // hmm... this isn't good. There are not entry points on the map. We're done.
-        return;
-    }
-    // if we're somewhere: first, try to go further from here
-    if (route[route.length-1].time < trip_length_hours + 3)
-    {
-        for (var i = 0; i < map.length; i++)
-        {
-            if ((map[i].junctA_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_A_TO_B) == 0))
-            {
-                var total_time = route[route.length-1].time + map[i].time;
-                route.push({map_idx: i, junct_idx: map[i].junctB_idx, dir: TRAVELED_FROM_A_TO_B, time: total_time});
-                map[i].dirs |= TRAVELED_FROM_A_TO_B;
-                return 1;
-            }
-            if ((map[i].junctB_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_B_TO_A) == 0))
-            {
-                var total_time = route[route.length-1].time + map[i].time;
-                route.push({map_idx: i, junct_idx: map[i].junctA_idx, dir: TRAVELED_FROM_B_TO_A, time: total_time});
-                map[i].dirs |= TRAVELED_FROM_B_TO_A;
-                return 1;
+                route_time_minutes += segments[i].time_minutes;
+                route.push(i);
+                segments[i].available = 0;
+                return route_time_minutes;
             }
         }
     }
-    // second, take a different path or backup
+    // second, backup
+    var last_segment_idx = route.pop();
+    route_time_minutes -= segments[last_segment_idx].time_minutes;
+    segments[last_segment_idx].available = 1;
     while(route.length > 0)
     {
-        // remove the last segment
-        var last = route.pop();
-        map[last.map_idx].dirs ^= last.dir;
-        // start from last segment and look for the next one
-        if (route.length > 0)
+        for (var i = last_segment_idx + 1; i < segments.length; i++)
         {
-            for (var i = last.map_idx + 1; i < map.length; i++)
+            if ((segments[i].from_junct_idx == last_junction_idx) && (segments[i].available == 1))
             {
-                if ((map[i].junctA_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_A_TO_B) == 0))
-                {
-                    var total_time = route[route.length-1].time + map[i].time;
-                    route.push({map_idx: i, junct_idx: map[i].junctB_idx, dir: TRAVELED_FROM_A_TO_B, time: total_time});
-                    map[i].dirs |= TRAVELED_FROM_A_TO_B;
-                    return 1;
-                }
-                if ((map[i].junctB_idx == route[route.length-1].junct_idx) && ((map[i].dirs & TRAVELED_FROM_B_TO_A) == 0))
-                {
-                    var total_time = route[route.length-1].time + map[i].time;
-                    route.push({map_idx: i, junct_idx: map[i].junctA_idx, dir: TRAVELED_FROM_B_TO_A, time: total_time});
-                    map[i].dirs |= TRAVELED_FROM_B_TO_A;
-                    return 1;
-                }
+                route_time_minutes += segments[i].time_minutes;
+                route.push(i);
+                segments[i].available = 0;
+                return route_time_minutes;
             }
         }
-        // nothing from here. We've already popped the last segment, go around again - one level up
+        // backup some more
+        last_segment_idx = route.pop();
+        route_time_minutes -= segments[last_segment_idx].time_minutes;
+        segments[last_segment_idx].available = 1;
     }
     return 0;
 }
@@ -118,67 +154,40 @@ function findRoutes()
     document.getElementById('para').innerHTML = "";
 
     // get the user parameters out of the form elements
-    var trip_length_hours = document.getElementById('trip_length_hours').value;
+    var desired_trip_length_hours = document.getElementById('trip_length_hours').value;
+    var desired_trip_length_minutes = desired_trip_length_hours * 60;
     var kilometer_per_hour_paddling = document.getElementById('kilometer_per_hour_paddling').value;
     var meters_per_hour_portage = document.getElementById('meters_per_hour_portage').value;
     var load_and_unload_minutes = document.getElementById('load_and_unload_minutes').value;
     
     // calculate the cost of each segment using the user supplied parameters
-    for (var i = 0; i < map.length; i++)
+    for (var i = 0; i < segments.length; i++)
     {
-        map[i].time = map[i].tot_dist_km / kilometer_per_hour_paddling * 60 + map[i].port_dist_m / meters_per_hour_portage * 60 + map[i].num_port * load_and_unload_minutes;
-        map[i].dirs = 0;
+        segments[i].available = 1;
+        segments[i].time_minutes =  map[segments[i].map_idx].tot_dist_km / kilometer_per_hour_paddling * 60 +
+                                    map[segments[i].map_idx].port_dist_m / meters_per_hour_portage * 60 +
+                                    map[segments[i].map_idx].num_port * load_and_unload_minutes;
     }
 
     var count = 0;
-    var routes = [];
-    var route = [];
-    while ((count < 100) && not_finished_exploring(route, trip_length_hours * 60))
+    for (var i = 0; i < num_entries; i++)
     {
-        // if the last segment of the route goes from B to A and A is an entry point, append the route to whatever is already in the div
-        if ((route[route.length-1].dir == TRAVELED_FROM_B_TO_A) && (map[route[route.length-1].map_idx].entry_idx == map[route[0].map_idx].entry_idx))
+        var route = [];
+        var route_time_minutes = segments[i].time_minutes;
+        route.push(i);
+        
+        while ((count < 100) && ((route_time_minutes = not_finished_exploring(route, desired_trip_length_minutes, route_time_minutes)) > 0))
         {
-            // is this trip the correct length?
-            if ((route[route.length-1].time > (trip_length_hours * 60 * 0.95)) && (route[route.length-1].time < (trip_length_hours * 60 * 1.05)))
+            if (segments[route[0]].from_junct_idx == segments[route[route.length-1]].to_junct_idx)  // are we back where we started?
             {
-                var m = [];
-                for (var i = 0; i < map.length; i++)
+                document.getElementById('para').innerHTML += " hello<br>";
+                if ((route_time_minutes > (desired_trip_length_minutes * 0.95)) && (route_time_minutes < (desired_trip_length_minutes * 1.05)))
                 {
-                    m.push(map[i].dirs);
-                }
-                var equal = 0;
-                for (var i = 0; i < routes.length; i++)
-                {
-                    var difference = 0;
-                    for (var j = 0; j < map.length; j++)
-                    {
-                        if (m[j] != routes[i].map[j])
-                        {
-                            difference = 1;
-                        }
-                    }
-                    if (difference == 0)
-                    {
-                        equal = 1;
-                    }
-                }
-                if (equal == 0)
-                {
+                    document.getElementById('para').innerHTML += " route: " + count + " <br>";
                     count++;
-                    routes.push({route: route.slice(), map: m.slice()});
                 }
             }
         }
-    }
-    document.getElementById('para').innerHTML = "";
-    for (var i = 0; i < routes.length; i++)
-    {
-        document.getElementById('para').innerHTML += " " + i + " (" + (Math.round(routes[i].route[routes[i].route.length-1].time*100/60)/100) + " hours) " + entrypoints[map[routes[i].route[0].map_idx].entry_idx] + ": " + junctions[map[routes[i].route[0].map_idx].junctA_idx];
-        for (var j = 0; j < routes[i].route.length; j++)
-        {
-            document.getElementById('para').innerHTML += " -> " + junctions[routes[i].route[j].junct_idx];
-        }
-        document.getElementById('para').innerHTML += "<br>";
     }
 }
         
