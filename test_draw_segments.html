@@ -1,0 +1,22 @@
+<body onLoad="drawCanvas();">
+    <script src="data.js"></script>
+    <script>
+        function drawCanvas() {
+            var img = new Image();
+            img.src = "IMG_9440.PNG";
+            img.onload = function() {
+                var circle_canvas = document.getElementById("canvas");
+                var context = circle_canvas.getContext("2d");
+                context.drawImage(img, 45, 45);
+                context.beginPath();
+                
+                for (var i = 0; i < map.length; i++)
+                {
+                    context.moveTo(junctions[map[i].junctA_idx].pix_x + 45, junctions[map[i].junctA_idx].pix_y + 45);
+                    context.lineTo(junctions[map[i].junctB_idx].pix_x + 45, junctions[map[i].junctB_idx].pix_y + 45);
+                    context.stroke();
+                }
+            };
+        }
+    </script>
+<canvas id="canvas" width="1340" height="1340"/>
