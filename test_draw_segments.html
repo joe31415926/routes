@@ -10,8 +10,16 @@
                 context.drawImage(img, 45, 45);
                 context.beginPath();
                 
+                for(var i = 0; i < junctions.length; i++)
+                {
+                    context.beginPath();
+                    context.arc(junctions[i].pix_x + 45, junctions[i].pix_y + 45, 5, 0, 2 * Math.PI, false);
+                    context.stroke();
+                }
+                                
                 for (var i = 0; i < map.length; i++)
                 {
+                    context.beginPath();
                     context.moveTo(junctions[map[i].junctA_idx].pix_x + 45, junctions[map[i].junctA_idx].pix_y + 45);
                     context.lineTo(junctions[map[i].junctB_idx].pix_x + 45, junctions[map[i].junctB_idx].pix_y + 45);
                     context.stroke();

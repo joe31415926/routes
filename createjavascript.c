@@ -150,8 +150,8 @@ int main(int argc, char **argv)
         if (nl) *nl++ = '\0';
         
         char *e = pullstring(&s);
-        char *lat = pullstring(&s);
         char *lon = pullstring(&s);
+        char *lat = pullstring(&s);
         char *pix_x = pullstring(&s);
         char *pix_y = pullstring(&s);
         
@@ -162,8 +162,8 @@ int main(int argc, char **argv)
         {
             junct_lat[idx] = lat;
             junct_lon[idx] = lon;
-            junct_lat_float[idx] = strtof(lat, NULL) - 45;  // normalize to improve accuracy
-            junct_lon_float[idx] = strtof(lon, NULL) + 78;
+            junct_lat_float[idx] = strtof(lat, NULL) + 78;  // normalize to improve accuracy
+            junct_lon_float[idx] = strtof(lon, NULL) - 45;
             
             if (strcmp(pix_x,"") && strcmp(pix_x,"0"))
             {
@@ -221,6 +221,6 @@ int main(int argc, char **argv)
     printf("];\n\n");
     printf("var junctions = [\n");
     for (i = 0; junctions[i]; i++)
-        printf("{ name: \"%s\", x: %s, y: %s, pix_x: %g, pix_y: %g},\n", junctions[i], junct_lat[i], junct_lon[i], junct_lat_float[i] * ls_slope_lat + ls_inter_lat, junct_lon_float[i] * ls_slope_lon + ls_inter_lon);
+        printf("{ name: \"%s\", y: %s, x: %s, pix_x: %g, pix_y: %g},\n", junctions[i], junct_lon[i], junct_lat[i], junct_lat_float[i] * ls_slope_lat + ls_inter_lat, junct_lon_float[i] * ls_slope_lon + ls_inter_lon);
     printf("];\n\n");
 }
